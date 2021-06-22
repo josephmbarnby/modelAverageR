@@ -28,10 +28,16 @@ Whether you want to average the models using REML rather than AIC or BIC values.
 Do you want some variables scaled (keeping the same distribution) to normalise estimates?. Defaults to FALSE. If TRUE, you must specify which variables to include (see below)
 }
   \item{include}{
-A vector of character strings which match the column names you want to scale.
+If Scale == TRUE. A vector of character strings which match the column names you want to scale. NB: Will not break the model if Scale == FALSE but will not do anythign either.
+}
+  \item{threshold}{
+The threshold at which algorithm will retain models to average over relative to the best fitting model (quanitifed by the AICc). E.g. if the delta is 2, the function will retain all models that are AICc < 2 away from the best fitting model to average over. Default is 2.
+}
+  \item{family}{
+If using a the glmer model will allow specification of whether a guassian, binomial, gamma, poisson etc. model is to be used. See ?glm and ?gmer for more details.
 }
   \item{plot}{
-Whether you want a ggplot of the estimates. Defaults to FALSE.
+Whether you want a plot of the estimates. Defaults to FALSE.
 }
 }
 \details{
