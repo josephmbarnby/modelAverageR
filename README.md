@@ -10,3 +10,23 @@ devtools::install_github("josephmbarnby/modelAverageR")
 
 # Test out a dummy model for averaging:
 
+## Generate some synthetic data
+x <- rnorm(n = 1000, mean = 2, sd = 0.2)
+y <- rnorm(n = 1000, mean = 0, sd = 0.5)
+z <- rnorm(n = 1000, mean = 5, sd = 1)
+Age <- sample(20:65, 1000, replace = T)
+myDF <- data.frame(
+x = x,
+y = y,
+z = z,
+Age = Age,
+ID = 1:1000
+)
+## Create a formula
+formula <- as.formula(x ~ y + z + Age)
+## Run the comparison (no scaling)
+modelAverage(formula = formula, dat = myDF, REML = F, plot = F)
+## Run the comparison (with scaling)
+modelAverage(formula = formula, dat = myDF, REML = F, scale = F, include = c('x', 'y', 'z', 'Age'), plot = F)
+## Run the comparison (with a plot)
+modelAverage(formula = formula, dat = myDF, REML = F, scale = F, include = c('x', 'y', 'z', 'Age'), plot = T)
