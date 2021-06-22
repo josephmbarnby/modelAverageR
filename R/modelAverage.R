@@ -31,25 +31,20 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
   x.a            <- try(model.avg (x.models, adjusted=FALSE, revised.var=TRUE), silent = T)
 
   if(class(x.a) == "try-error"){
-  print(summary(x))
-  print(confint(x))
   coefs <- as.data.frame(summary(x)[4])
   coefs$term <- rownames(coefs)
   coefs$conf.low <- confint(x)[,1]
   coefs$conf.high<- confint(x)[,2]
   colnames(coefs)[1] <- c('estimate')
-  return(list(summary(x), confint(x)))
+  list(summary(x), confint(x))
   #summarize global model
   } else {
-  print(summary(x.a))
-  print(importance(x.a))
-  print(confint(x.a))
   coefs <- as.data.frame(summary(x.a)[9])
   coefs$term <- rownames(coefs)
   coefs$conf.low <- confint(x.a)[,1]
   coefs$conf.high<- confint(x.a)[,2]
   colnames(coefs)[1] <- c('estimate')
-  return(list(summary(x.a), confint(x.a), importance(x.a)))
+  return(list(Summary = summary(x.a), ConfidenceInterval = confint(x.a), Importance = importance(x.a)))
   }
 
   #plot models
