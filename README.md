@@ -7,3 +7,6 @@ The package analyses your data using multi-model selection with model averaging.
 install.packages('devtools')
 
 devtools::install_github("josephmbarnby/modelAverageR")
+
+# Test out a dummy model for averaging:
+
