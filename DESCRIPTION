@@ -1,0 +1,19 @@
+Package: modelCompareR
+Title: Uses Information Theoretic analysis to weight and average regression models.
+Version: 1.0.0
+Authors@R: 
+    person(given = "Joe M",
+           family = "Barnby",
+           role = c("aut", "cre"),
+           email = "josephmbarnby@gmail.com",
+           comment = c(ORCID = "0000-0001-6002-1362"))
+Description: The package analyses your data using multi-model selection with model averaging (Grueber et al., 2011). AICc values are used to evaluate models. Lower AICc and BIC values indicates a better fit. To adjust for the intrinsic uncertainty over which model is the true ‘best’ model, models in the top model set (those with the smallest AICc and BIC values) to generate model-averaged effect sizes and confidence intervals (Burnham & Anderson, 2004). Parameter estimates and confidence intervals are provided with the full global model to robustly report a variable's effect in a model. This package relies on the work from the ‘MuMIn’ package (Barton, 2018). Visualizations are generated using the package ‘ggplot2’ (Wickham, 20160).
+License: `use_mit_license()`
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: MuMIn,
+         knitr,
+         ggplot2,
+         magrittr
