@@ -89,9 +89,9 @@ modelAverage(formula = formula, dat = myDF, REML = F, plot = F)
 
 
 ##Run the comparison (with scaling)
-modelAverage(formula = formula, dat = myDF, REML = F, scale = F, include = c('x', 'y', 'z', 'Age'), plot = F)
+modelAverage(formula = formula, dat = myDF, REML = F, scale = T, include = c('x', 'y', 'z', 'Age'), plot = F)
 
 ##Run the comparison (with a plot)
-modelAverage(formula = formula, dat = myDF, REML = F, scale = F, include = c('x', 'y', 'z', 'Age'), plot = T)
+modelAverage(formula = formula, dat = myDF, REML = F, scale = T, include = c('x', 'y', 'z', 'Age'), plot = T)
 
 
