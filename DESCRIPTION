@@ -16,4 +16,8 @@ RoxygenNote: 7.1.1
 Imports: MuMIn,
          knitr,
          ggplot2,
-         magrittr
+         magrittr,
+         stats,
+         LME4,
+         ordinal
+
