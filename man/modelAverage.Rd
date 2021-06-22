@@ -85,14 +85,14 @@ ID = 1:1000
 formula <- as.formula(x ~ y + z + Age)
 
 ##Run the comparison (no scaling)
-modelAverage(formula = formula, data = myDF, REML = F, plot = F)
+modelAverage(formula = formula, dat = myDF, REML = F, plot = F)
 
 
 ##Run the comparison (with scaling)
-modelAverage(formula = formula, data = myDF, REML = F, scale = F, include = c('x', 'y', 'z', 'Age'), plot = F)
+modelAverage(formula = formula, dat = myDF, REML = F, scale = F, include = c('x', 'y', 'z', 'Age'), plot = F)
 
 ##Run the comparison (with a plot)
-modelAverage(formula = formula, data = myDF, REML = F, scale = F, include = c('x', 'y', 'z', 'Age'), plot = T)
+modelAverage(formula = formula, dat = myDF, REML = F, scale = F, include = c('x', 'y', 'z', 'Age'), plot = T)
 
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
