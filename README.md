@@ -5,4 +5,5 @@ The package analyses your data using multi-model selection with model averaging.
 
 # To install:
 install.packages('devtools')
+
 devtools::install_github("josephmbarnby/modelCompareR")
