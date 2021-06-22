@@ -18,6 +18,6 @@ Imports: MuMIn,
          ggplot2,
          magrittr,
          stats,
-         LME4,
+         lme4,
          ordinal
 
