@@ -1,4 +1,4 @@
-Package: modelCompareR
+Package: modelAverageR
 Title: Uses Information Theoretic analysis to weight and average regression models.
 Version: 1.0.0
 Authors@R: 
