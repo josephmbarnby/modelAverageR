@@ -1,25 +1,36 @@
 
-modelAverage <- function(formula, data, modeltype = lm, REML = F, scale = F, include, plot = F){ # X needs to be a formula
+modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, include, threshold = 2, family = 'binomial', plot = F){
 
-  data = as.data.frame(data)
+  dat = data_frame(dat)
 
   if(scale){
   include = as.vector(include)
-  data[include] = sapply(data[include], scale)
+  dat[include] = sapply(dat[include], scale)
   }
 
-  formula = as.formula(formula)
+  zX   = as.formula(formula)
+
   #First create overall model #
-  modelclass <- as.function(modeltype)
-  x <- modelclass(formula = formula, data = data, na.action = na.fail)
+  if       (modelclass == 'lm'){
+  x <- lm(formula = zX,   data = dat, na.action = na.fail)
+  } else if(modelclass == 'lmer'){
+  x <- lmer(formula = zX, data = dat, na.action = na.fail)
+  } else if(modelclass == 'clm'){
+  x <- clm(formula = zX,  data = dat, na.action = na.fail)
+  } else if(modelclass == 'clmm'){
+  x <- clmm(formula = zX,  data = dat, na.action = na.fail)
+  } else if(modelclass == 'glm'){
+  x <- glm(formula = zX,  data = dat, na.action = na.fail, family = family)
+  } else if(modelclass == 'glmer'){
+  x <- glmer(formula = zX,  data = dat, na.action = na.fail, family = family)
+  }
 
   #run MuMIn model averaging
   x.set          <- dredge    (x, REML = REML, trace = 2)
-  x.models       <- get.models(x.set, subset = delta<2)
+  x.models       <- get.models(x.set, subset = delta<threshold)
   x.a            <- try(model.avg (x.models, adjusted=FALSE, revised.var=TRUE), silent = T)
 
-  if(class(x.a) == "try-error")
-  {
+  if(class(x.a) == "try-error"){
   print(summary(x))
   print(confint(x))
   coefs <- as.data.frame(summary(x)[4])
@@ -27,6 +38,7 @@ modelAverage <- function(formula, data, modeltype = lm, REML = F, scale = F, inc
   coefs$conf.low <- confint(x)[,1]
   coefs$conf.high<- confint(x)[,2]
   colnames(coefs)[1] <- c('estimate')
+  return(list(summary(x), confint(x)))
   #summarize global model
   } else {
   print(summary(x.a))
@@ -37,13 +49,14 @@ modelAverage <- function(formula, data, modeltype = lm, REML = F, scale = F, inc
   coefs$conf.low <- confint(x.a)[,1]
   coefs$conf.high<- confint(x.a)[,2]
   colnames(coefs)[1] <- c('estimate')
+  return(list(summary(x.a), confint(x.a), importance(x.a)))
   }
 
   #plot models
 
   if(plot){
 
-  ggplot(coefs %>%
+  coefPlot <- ggplot(coefs %>%
      mutate(term = fct_reorder(term, estimate, .desc = T))) +
 
     geom_pointrange(aes(x=term, y=estimate, ymin=conf.low, ymax=conf.high)) +
@@ -53,5 +66,11 @@ modelAverage <- function(formula, data, modeltype = lm, REML = F, scale = F, inc
     theme(axis.title.x = element_blank(),
           axis.title = element_text(size =14),
           axis.text = element_text(size =14))
+
+  if(class(x.a) == "try-error"){
+  return(list(summary(x), confint(x), coefPlot))
+  }else{
+  return(list(summary(x.a), confint(x.a), coefPlot))
+  }
   }
 }
