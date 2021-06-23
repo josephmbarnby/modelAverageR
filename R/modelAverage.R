@@ -63,9 +63,9 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
   }
     
   if(class(x.a) == "try-error"){
-  return(list(Summary = summary(x), ConfidenceInterval = confint(x)), coefPlot)
+    return(list(Summary = summary(x), ConfidenceInterval = confint(x), Plot = coefPlot))
   }else{
-  return(list(Summary = summary(x.a), ConfidenceInterval = confint(x.a), Importance = importance(x.a)), coefPlot)
+    return(list(Summary = summary(x.a), ConfidenceInterval = confint(x.a), Importance = importance(x.a), Plot = coefPlot))
   }
   
 }
