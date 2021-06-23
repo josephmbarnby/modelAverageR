@@ -49,10 +49,8 @@ formula <- as.formula(x ~ y + z + Age)
 
 xTest <- modelAverage(formula = formula, dat = myDF, REML = F, plot = F)
 
----------------------------------------------------------------
-
 print(xTest)
-
+```
 $Summary
 
 Call:
@@ -103,7 +101,6 @@ $Importance
 Sum of weights:      0.41 0.34 0.11
 N containing models:    2    2    1
 
-```
 ### Run the comparison (with scaling)
 ```r
 
