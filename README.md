@@ -66,7 +66,7 @@ modelAverage(formula = formula, dat = myDF, REML = F, scale = T, include = c('x'
 ```
 ### Run the comparison (with a plot)
 
-You can also plot your regression output using the 'plot' argument which will automatically scale your variables from highest (>0) to lowest (<0) beta coefficients.
+You can also plot your regression output using the 'plot' argument which will automatically order your variables from highest (>0) to lowest (<0) beta coefficients. The plot function operate irrespective of whether you want to scale your variables or not.
 
 ```r
 
