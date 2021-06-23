@@ -44,7 +44,6 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
   coefs$conf.low <- confint(x.a)[,1]
   coefs$conf.high<- confint(x.a)[,2]
   colnames(coefs)[1] <- c('estimate')
-  return(list(Summary = summary(x.a), ConfidenceInterval = confint(x.a), Importance = importance(x.a)))
   }
 
   #plot models
@@ -61,11 +60,12 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
     theme(axis.title.x = element_blank(),
           axis.title = element_text(size =14),
           axis.text = element_text(size =14))
-
+  }
+    
   if(class(x.a) == "try-error"){
   return(list(summary(x), confint(x), coefPlot))
   }else{
-  return(list(summary(x.a), confint(x.a), coefPlot))
+  return(list(Summary = summary(x.a), ConfidenceInterval = confint(x.a), Importance = importance(x.a), coefPlot))
   }
-  }
+  
 }
