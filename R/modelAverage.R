@@ -62,10 +62,14 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
           axis.text = element_text(size =14))
   }
     
-  if(class(x.a) == "try-error"){
+  if       (class(x.a) == "try-error" && plot == T){
     return(list(Summary = summary(x), ConfidenceInterval = confint(x), Plot = coefPlot))
-  }else{
+  }else if (class(x.a) != "try-error" && plot == T){
     return(list(Summary = summary(x.a), ConfidenceInterval = confint(x.a), Importance = importance(x.a), Plot = coefPlot))
-  }
+  }else if (class(x.a) == "try-error" && plot == F){
+    return(list(Summary = summary(x), ConfidenceInterval = confint(x)))
+  }else{
+    return(list(Summary = summary(x.a), ConfidenceInterval = confint(x.a), Importance = importance(x.a)))
+    }
   
 }
