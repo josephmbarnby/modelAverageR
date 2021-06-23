@@ -1,14 +1,14 @@
 
 modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, include, threshold = 2, family = 'binomial', plot = F){
 
-  dat = data_frame(dat)
+  dat <- data_frame(dat)
 
   if(scale){
-  include = as.vector(include)
-  dat[include] = sapply(dat[include], scale)
+  include <- as.vector(include)
+  dat[include] <- sapply(dat[include], scale)
   }
 
-  zX   = as.formula(formula)
+  zX   <- as.formula(formula)
 
   #First create overall model #
   if       (modelclass == 'lm'){
