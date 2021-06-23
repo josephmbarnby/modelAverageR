@@ -72,4 +72,4 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
     return(list(Summary = summary(x.a), ConfidenceInterval = confint(x.a), Importance = importance(x.a)))
     }
   
-}
+}#end of function
