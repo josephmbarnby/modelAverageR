@@ -26,7 +26,8 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
   }
 
   #run MuMIn model averaging
-  x.set          <- dredge    (x, REML = REML, trace = 2)
+  x.set          <- try(dredge    (x, REML = REML, trace = 2), silent = T)
+  if(class(x.set)== "try-error"){warning("Drege function not found. Make sure 'MuMIn' package is installaed and try again")}
   x.models       <- get.models(x.set, subset = delta<threshold)
   x.a            <- try(model.avg (x.models, adjusted=FALSE, revised.var=TRUE), silent = T)
 
