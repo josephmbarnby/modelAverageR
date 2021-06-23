@@ -1,33 +1,33 @@
 
 modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, include, threshold = 2, family = 'binomial', plot = F){
 
-  dat <- data_frame(dat)
+  dat <- as.data.frame(dat)
 
-  if(scale){
-  include <- as.vector(include)
-  dat[include] <- sapply(dat[include], scale)
-  }
+    if(scale){
+      include <- as.vector(include)
+      dat[include] <- sapply(dat[include], scale)
+    }
 
   zX   <- as.formula(formula)
 
   #First create overall model #
-  if       (modelclass == 'lm'){
-  x <- lm(formula = zX,   data = dat, na.action = na.fail)
-  } else if(modelclass == 'lmer'){
-  x <- lmer(formula = zX, data = dat, na.action = na.fail)
-  } else if(modelclass == 'clm'){
-  x <- clm(formula = zX,  data = dat, na.action = na.fail)
-  } else if(modelclass == 'clmm'){
-  x <- clmm(formula = zX,  data = dat, na.action = na.fail)
-  } else if(modelclass == 'glm'){
-  x <- glm(formula = zX,  data = dat, na.action = na.fail, family = family)
-  } else if(modelclass == 'glmer'){
-  x <- glmer(formula = zX,  data = dat, na.action = na.fail, family = family)
-  }
+    if       (modelclass == 'lm'){
+      x <- lm(formula = zX,   data = dat, na.action = na.fail)
+    } else if(modelclass == 'lmer'){
+      x <- lmer(formula = zX, data = dat, na.action = na.fail)
+    } else if(modelclass == 'clm'){
+      x <- clm(formula = zX,  data = dat, na.action = na.fail)
+    } else if(modelclass == 'clmm'){
+      x <- clmm(formula = zX,  data = dat, na.action = na.fail)
+    } else if(modelclass == 'glm'){
+      x <- glm(formula = zX,  data = dat, na.action = na.fail, family = family)
+    } else if(modelclass == 'glmer'){
+      x <- glmer(formula = zX,  data = dat, na.action = na.fail, family = family)
+    }
 
   #run MuMIn model averaging
   x.set          <- try(dredge    (x, REML = REML, trace = 2), silent = T)
-  if(class(x.set)== "try-error"){warning("Drege function not found. Make sure 'MuMIn' package is installaed and try again")}
+  if(class(x.set)[1]== "try-error"){warning("Drege function not found. Make sure 'MuMIn' package is installaed and try again")}
   x.models       <- get.models(x.set, subset = delta<threshold)
   x.a            <- try(model.avg (x.models, adjusted=FALSE, revised.var=TRUE), silent = T)
 
