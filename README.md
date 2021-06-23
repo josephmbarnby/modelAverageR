@@ -47,9 +47,11 @@ formula <- as.formula(x ~ y + z + Age)
 ### Run the comparison (no scaling)
 ```r
 
-modelAverage(formula = formula, dat = myDF, REML = F, plot = F)
+xTest <- modelAverage(formula = formula, dat = myDF, REML = F, plot = F)
 
 ---------------------------------------------------------------
+
+print(xTest)
 
 $Summary
 
@@ -112,7 +114,5 @@ modelAverage(formula = formula, dat = myDF, REML = F, scale = T, include = c('x'
 ```r
 
 modelAverage(formula = formula, dat = myDF, REML = F, scale = T, include = c('x', 'y', 'z', 'Age'), plot = T)
-
-![image](https://user-images.githubusercontent.com/22611339/123044251-0146d180-d42c-11eb-932c-410919ceffa1.png)
 
 ```
