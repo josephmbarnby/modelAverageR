@@ -30,10 +30,18 @@ ID = 1:1000
 )
 ```
 ### Create a formula
+```{r}
 formula <- as.formula(x ~ y + z + Age)
+```
 ### Run the comparison (no scaling)
+```{r}
 modelAverage(formula = formula, dat = myDF, REML = F, plot = F)
+```
 ### Run the comparison (with scaling)
+```{r}
 modelAverage(formula = formula, dat = myDF, REML = F, scale = T, include = c('x', 'y', 'z', 'Age'), plot = F)
+```
 ### Run the comparison (with a plot)
+```{r}
 modelAverage(formula = formula, dat = myDF, REML = F, scale = T, include = c('x', 'y', 'z', 'Age'), plot = T)
+```
