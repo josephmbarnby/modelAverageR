@@ -6,21 +6,19 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
       dat[include] <- sapply(dat[include], scale)
     }
 
-  zX   <- as.formula(formula)
-
   #First create overall model #
     if       (modelclass == 'lm'){
-      x <- lm(formula = zX,   data = dat, na.action = na.fail)
+      x <- lm(formula = as.formula(formula),   data = dat, na.action = na.fail)
     } else if(modelclass == 'lmer'){
-      x <- lmer(formula = zX, data = dat, na.action = na.fail)
+      x <- lmer(formula = as.formula(formula), data = dat, na.action = na.fail)
     } else if(modelclass == 'clm'){
-      x <- clm(formula = zX,  data = dat, na.action = na.fail)
+      x <- clm(formula = as.formula(formula),  data = dat, na.action = na.fail)
     } else if(modelclass == 'clmm'){
-      x <- clmm(formula = zX,  data = dat, na.action = na.fail)
+      x <- clmm(formula = as.formula(formula),  data = dat, na.action = na.fail)
     } else if(modelclass == 'glm'){
-      x <- glm(formula = zX,  data = dat, na.action = na.fail, family = family)
+      x <- glm(formula = as.formula(formula),  data = dat, na.action = na.fail, family = family)
     } else if(modelclass == 'glmer'){
-      x <- glmer(formula = zX,  data = dat, na.action = na.fail, family = family)
+      x <- glmer(formula = as.formula(formula),  data = dat, na.action = na.fail, family = family)
     }
 
   #run MuMIn model averaging
