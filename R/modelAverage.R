@@ -1,8 +1,6 @@
 
 modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, include, threshold = 2, family = 'binomial', plot = F){
 
-  dat <- as.data.frame(dat)
-
     if(scale){
       include <- as.vector(include)
       dat[include] <- sapply(dat[include], scale)
