@@ -10,16 +10,22 @@ modelAverage <- function(formula, dat, modelclass = 'lm', REML = F, scale = F, i
 
   #First create overall model #
     if       (modelclass == 'lm'){
+      dat <- dat
       x <- lm(formula = zX,   data = dat, na.action = na.fail)
     } else if(modelclass == 'lmer'){
+        dat <- dat
       x <- lmer(formula = zX, data = dat, na.action = na.fail)
     } else if(modelclass == 'clm'){
+        dat <- dat
       x <- clm(formula = zX,  data = dat, na.action = na.fail)
     } else if(modelclass == 'clmm'){
+        dat <- dat
       x <- clmm(formula = zX,  data = dat, na.action = na.fail)
     } else if(modelclass == 'glm'){
+        dat <- dat
       x <- glm(formula = zX,  data = dat, na.action = na.fail, family = family)
     } else if(modelclass == 'glmer'){
+        dat <- dat
       x <- glmer(formula = zX,  data = dat, na.action = na.fail, family = family)
     }
 
